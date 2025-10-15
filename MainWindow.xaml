@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PainterApp"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="WPF Painter App" Height="600" Width="800">
 
@@ -17,9 +18,15 @@
             </MenuItem>
             
         </Menu>
+
+        <ToolBarTray Height="40" DockPanel.Dock="Top">
+            <ToolBar Height="35" Background="#FF5FA8E8" Width="200">
+                <Label Content="筆刷色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"  />
+            </ToolBar>
+        </ToolBarTray>
         
-        <Canvas Background="Azure" Height="515" DockPanel.Dock="Top" />
-        <StatusBar Height="40" DockPanel.Dock="Bottom" Background="LightGray" >
+        <Canvas Background="#FFBAEDED" Height="515" DockPanel.Dock="Top" />
+        <StatusBar Height="40" DockPanel.Dock="Bottom" Background="#FFB5BBC1" >
             <StatusBarItem>
                 <Label Content="Ready" Width="100" Height="28" Margin="100, 0, 0, 0" FontSize="14"  />
             </StatusBarItem>
