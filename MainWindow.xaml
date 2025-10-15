@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PainterApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="WPF Painter App" Height="600" Width="800">
 
-    </Grid>
+    <DockPanel>
+        <Menu Height="30" DockPanel.Dock="Top">
+            <MenuItem Header="檔案" Height="30">
+                <MenuItem Header="開新檔案" Height="30" />
+                <MenuItem Header="開起舊案" Height="30" />
+                <MenuItem Header="儲存檔案" Height="30" />
+                <MenuItem Header="結束" Height="30" />
+            </MenuItem>
+            
+        </Menu>
+        
+        <Canvas Background="Azure" Height="515" DockPanel.Dock="Top" />
+        <StatusBar Height="40" DockPanel.Dock="Bottom" Background="LightGray" >
+            <StatusBarItem>
+                <Label Content="Ready" Width="100" Height="28" Margin="100, 0, 0, 0" FontSize="14"  />
+            </StatusBarItem>
+        </StatusBar>
+    </DockPanel>
 </Window>
