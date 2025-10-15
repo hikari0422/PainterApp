@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PainterApp"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="WPF Painter App" Height="600" Width="800">
+        Title="WPF Painter App" Height="661" Width="1012">
 
     <DockPanel>
         <Menu Height="30" DockPanel.Dock="Top">
@@ -21,25 +21,40 @@
 
         <ToolBarTray Height="40" DockPanel.Dock="Top">
             <ToolBar Height="35" Background="#FF5FA8E8" Width="400">
-                <Label Content="筆刷色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"  />
-                <xctk:ColorPicker Width="150" Height="30" x:Name="StrokeColorPicker" DisplayColorAndName="True" />
-                <Label Content="填滿色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"  />
-                <xctk:ColorPicker Width="150" Height="30" x:Name="FillColorPicker" DisplayColorAndName="True" />
+                <Label Content="筆刷色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
+                <xctk:ColorPicker x:Name="strokeColorPicker" Width="100" Height="30" DisplayColorAndName="True" SelectedColorChanged="strokeColorPicker_SelectedColorChanged"/>
+                <Label Content="填滿色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
+                <xctk:ColorPicker x:Name="fillColorPicker" Width="100" Height="30" DisplayColorAndName="True" SelectedColorChanged="fillColorPicker_SelectedColorChanged"/>
 
-                <Slider x:Name="strokeThicknessSlider" Width="200" VerticalAlignment="Center" Minimum="1" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" Margin="30, 0, 0, 0" />
+                <Slider x:Name="strokeThicknessSlider" Width="200" VerticalAlignment="Center" Minimum="1" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" Margin="30, 0, 0, 0" ValueChanged="strokeThicknessSlider_ValueChanged" />
                 <Label Width="40" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Content="{Binding ElementName=strokeThicknessSlider, Path=Value, StringFormat=F0}" Margin="10, 0, 0, 0" HorizontalContentAlignment="Center" />
             </ToolBar>
             <ToolBar Height="35" Width="300" Background="LightGray" >
-                <RadioButton Width="35" Height="35" Tag="Line">
-                    <Image Height="32" Width="32" Source="/Image/line.png" />
+                <RadioButton Width="35" Height="35" Tag="Line" Checked="ShapeButton_Checked">
+                    <Image Height="30" Width="30" Source="/line.png"/>
+                </RadioButton>
+                <RadioButton Width="35" Height="35" Tag="Rectangle" Checked="ShapeButton_Checked">
+                    <Image Height="30" Width="30" Source="/rectangle.png"/>
+                </RadioButton>
+                <RadioButton Width="35" Height="35" Tag="Ellipse" Checked="ShapeButton_Checked">
+                    <Image Height="30" Width="30" Source="/ellipse.png"/>
+                </RadioButton>
+                <RadioButton Width="35" Height="35" Tag="Polyline" Checked="ShapeButton_Checked">
+                    <Image Height="30" Width="30" Source="/polyline.png"/>
                 </RadioButton>
             </ToolBar>
         </ToolBarTray>
         
-        <Canvas Background="#FFBAEDED" Height="515" DockPanel.Dock="Top" />
+        <Canvas Background="#FFBAEDED" Height="515" DockPanel.Dock="Top" Width="799" />
         <StatusBar Height="40" DockPanel.Dock="Bottom" Background="#FFB5BBC1" >
             <StatusBarItem>
-                <Label Content="Ready" Width="100" Height="28" Margin="100, 0, 0, 0" FontSize="14"  />
+                <Label x:Name="statusLabel" Content ="Ready" Width="100" Height="28" Margin="100,0,0,0" FontSize="14"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label x:Name="colorLabel" Width="400" Height="28" FontSize="14"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label x:Name="shapeLabel" Width="200" Height="28" FontSize="14"/>
             </StatusBarItem>
         </StatusBar>
     </DockPanel>
