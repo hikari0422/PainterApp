@@ -25,9 +25,10 @@
                 <xctk:ColorPicker x:Name="strokeColorPicker" Width="100" Height="30" DisplayColorAndName="True" SelectedColorChanged="strokeColorPicker_SelectedColorChanged"/>
                 <Label Content="填滿色彩" Width="70" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
                 <xctk:ColorPicker x:Name="fillColorPicker" Width="100" Height="30" DisplayColorAndName="True" SelectedColorChanged="fillColorPicker_SelectedColorChanged"/>
-
-                <Slider x:Name="strokeThicknessSlider" Width="200" VerticalAlignment="Center" Minimum="1" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" Margin="30, 0, 0, 0" ValueChanged="strokeThicknessSlider_ValueChanged" />
-                <Label Width="40" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Content="{Binding ElementName=strokeThicknessSlider, Path=Value, StringFormat=F0}" Margin="10, 0, 0, 0" HorizontalContentAlignment="Center" />
+            </ToolBar>
+            <ToolBar>
+                <Slider x:Name="strokeThicknessSlider" Width="120" VerticalAlignment="Center" Minimum="1" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" Margin="30,0,0,0" ValueChanged="strokeThicknessSlider_ValueChanged"/>
+                <Label Width="40" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" Content="{Binding Value, ElementName=strokeThicknessSlider}" Margin="10,0,0,0" HorizontalContentAlignment="Center"/>
             </ToolBar>
             <ToolBar Height="35" Width="300" Background="LightGray" >
                 <RadioButton x:Name="lineRadioButton" Width="35" Height="35" Tag="Line" Checked="ShapeButton_Checked">
