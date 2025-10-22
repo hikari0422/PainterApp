@@ -16,7 +16,7 @@
                 <MenuItem Header="儲存檔案" Height="30" />
                 <MenuItem Header="結束" Height="30" />
             </MenuItem>
-            
+
         </Menu>
 
         <ToolBarTray Height="40" DockPanel.Dock="Top">
@@ -30,32 +30,43 @@
                 <Label Width="40" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Content="{Binding ElementName=strokeThicknessSlider, Path=Value, StringFormat=F0}" Margin="10, 0, 0, 0" HorizontalContentAlignment="Center" />
             </ToolBar>
             <ToolBar Height="35" Width="300" Background="LightGray" >
-                <RadioButton Width="35" Height="35" Tag="Line" Checked="ShapeButton_Checked">
+                <RadioButton x:Name="lineRadioButton" Width="35" Height="35" Tag="Line" Checked="ShapeButton_Checked">
                     <Image Height="30" Width="30" Source="/line.png"/>
                 </RadioButton>
                 <RadioButton Width="35" Height="35" Tag="Rectangle" Checked="ShapeButton_Checked">
                     <Image Height="30" Width="30" Source="/rectangle.png"/>
                 </RadioButton>
                 <RadioButton Width="35" Height="35" Tag="Ellipse" Checked="ShapeButton_Checked">
-                    <Image Height="30" Width="30" Source="/ellipse.png"/>
+                    <Image Height="30" Width="30" Source="/ellipse.png" />
                 </RadioButton>
                 <RadioButton Width="35" Height="35" Tag="Polyline" Checked="ShapeButton_Checked">
                     <Image Height="30" Width="30" Source="/polyline.png"/>
                 </RadioButton>
+                <Separator />
+                <Button Width="35" Height="35" Tag="Eraser" Click="Eraser_Click">
+                    <Image Width="35" Height="35" Source="/eraser.png"/>
+                </Button>
+                <Separator />
+                <Button Width="35" Height="35" Tag="Trashcan" Click="Clear_Click" >
+                    <Image Width="35" Height="35" Source="/trashcan.png" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
-        
-        <Canvas Background="#FFBAEDED" Height="515" DockPanel.Dock="Top" Width="799" />
-        <StatusBar Height="40" DockPanel.Dock="Bottom" Background="#FFB5BBC1" >
+
+        <StatusBar Height="40" DockPanel.Dock="Bottom" Background="LightGray">
             <StatusBarItem>
-                <Label x:Name="statusLabel" Content ="Ready" Width="100" Height="28" Margin="100,0,0,0" FontSize="14"/>
+                <Label x:Name="statusLabel" Content ="Ready" Width="Auto" Height="28" Margin="10,0,0,0" FontSize="14"/>
             </StatusBarItem>
+            <Separator/>
             <StatusBarItem>
-                <Label x:Name="colorLabel" Width="400" Height="28" FontSize="14"/>
+                <Label x:Name="colorLabel" Width="Auto" Height="28" FontSize="14" Margin="20,0,0,0"/>
             </StatusBarItem>
+            <Separator/>
             <StatusBarItem>
-                <Label x:Name="shapeLabel" Width="200" Height="28" FontSize="14"/>
+                <Label x:Name="shapeLabel" Width="Auto" Height="28" FontSize="14" Margin="20,0,0,0"/>
             </StatusBarItem>
         </StatusBar>
+        <Canvas Background="#FFBAEDED" x:Name="MyCanvas" MouseEnter="MyCanvas_MouseEnter" MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="MyCanvas_MouseMove" MouseLeftButtonUp="MyCanvas_MouseLeftButtonUp"/>
+
     </DockPanel>
 </Window>
