@@ -261,9 +261,13 @@ namespace PainterApp
                     break;
                 case "Polyline":
                     var polyline = MyCanvas.Children.OfType<Polyline>().LastOrDefault();
-                    polyline.Stroke = strokeBrush;
-                    polyline.Fill = fillBrush;
-                    polyline.StrokeThickness = strokeThickness;
+                    
+                    if (polyline != null)
+                    {
+                        polyline.Stroke = strokeBrush;
+                        polyline.Fill = fillBrush;
+                        polyline.StrokeThickness = strokeThickness;
+                    }
                     break;
             }
             MyCanvas.Cursor = Cursors.Pen;
