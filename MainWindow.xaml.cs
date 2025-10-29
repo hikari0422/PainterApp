@@ -9,6 +9,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using Microsoft.Win32;
+using System.IO;
+using System.Windows.Markup;
+
 
 namespace PainterApp
 {
@@ -272,6 +276,54 @@ namespace PainterApp
             }
             MyCanvas.Cursor = Cursors.Pen;
             DisplayStatus();
+        }
+
+        private void SaveCanvas_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Title = "儲存畫布內容",
+                Filter = "PNG圖片 (*.png)|*.png|JPEG圖片 (*.jpg;*.jpeg)|*.jpg;*.jpeg|原始檔案(*.xaml)|*.xaml|所有檔案(*.*)|*.*",
+                DefaultExt = "png"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                int w = Convert.ToInt32(MyCanvas.ActualWidth);
+                int h = Convert.ToInt32(MyCanvas.ActualHeight);
+
+                RenderTargetBitmap renderBitmap = new RenderTargetBitmap(w, h, 96d, 96d, PixelFormats.Default);
+                renderBitmap.Render(MyCanvas);
+
+                BitmapEncoder? encoder = null;
+                string ext = System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
+                switch (ext)
+                {
+                    case ".png":
+                        encoder = new PngBitmapEncoder();
+                        break;
+                    case ".jpg":
+                        encoder = new JpegBitmapEncoder();
+                        break;
+                    case ".xaml":
+                        string canvasXaml = XamlWriter.Save(MyCanvas);
+                        File.WriteAllText(saveFileDialog.FileName, canvasXaml);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (encoder != null)
+                {
+                    encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+
+                    using (FileStream outStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        encoder.Save(outStream);
+                    }
+                    MessageBox.Show("存檔成功");
+                }
+            }
         }
     }
 }
