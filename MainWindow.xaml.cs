@@ -283,7 +283,7 @@ namespace PainterApp
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
                 Title = "儲存畫布內容",
-                Filter = "PNG圖片 (*.png)|*.png|JPEG圖片 (*.jpg;*.jpeg)|*.jpg;*.jpeg|原始檔案(*.xaml)|*.xaml|所有檔案(*.*)|*.*",
+                Filter = "PNG圖片 (*.png)|*.png|JPEG圖片 (*.jpg;*.jpeg)|*.jpg;*.jpeg|原始檔案(*.xml)|*.xml|所有檔案(*.*)|*.*",
                 DefaultExt = "png"
             };
 
@@ -305,9 +305,10 @@ namespace PainterApp
                     case ".jpg":
                         encoder = new JpegBitmapEncoder();
                         break;
-                    case ".xaml":
-                        string canvasXaml = XamlWriter.Save(MyCanvas);
-                        File.WriteAllText(saveFileDialog.FileName, canvasXaml);
+                    case ".xml":
+                        string xamlString = XamlWriter.Save(MyCanvas);
+                        File.WriteAllText(saveFileDialog.FileName, xamlString);
+
                         break;
                     default:
                         break;
@@ -322,6 +323,31 @@ namespace PainterApp
                         encoder.Save(outStream);
                     }
                     MessageBox.Show("存檔成功");
+                }
+            }
+        }
+
+        private void OpenCanvas_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Title = "開啟畫布內容",
+                Filter = "Canvas物件(*xml)|*xml|所有檔案(*.*)|*.*",
+                DefaultExt = "xml"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                string canvasXaml = File.ReadAllText(filePath);
+
+                Canvas tempCanvas = XamlReader.Parse(canvasXaml) as Canvas;
+
+                var tempCanvasChildren = tempCanvas.Children.Cast<UIElement>().ToList();
+                foreach (var child in tempCanvasChildren)
+                {
+                    tempCanvas.Children.Remove(child);
+                    MyCanvas.Children.Add(child);
                 }
             }
         }
